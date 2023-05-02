@@ -1,0 +1,26 @@
+.page {
+  display: flex;
+  flex: 1;
+}
+
+.leftSide {
+  flex: 3 1;
+}
+
+.rightSide {
+  flex: 2 1;
+  background-color: #F8F9FC;
+}
+
+.dates {
+  display: flex;
+}
+
+.timeSelect {
+  :global {
+    .react-datepicker__triangle,
+    .react-datepicker__header--time--only {
+      display: none;
+    }
+  }
+}

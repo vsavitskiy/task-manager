@@ -1,19 +1,25 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga'
-import counterReducer from '../features/counter/counterSlice';
-// import mySaga from './sagas'
+import { appReducer } from "./model/slice";
+import { tasksReducer } from '../entities/tasks';
+import { usersReducer } from "../entities/users";
+import { filtersReducer } from "../features/filters";
+import { rootSaga } from './model/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    app: appReducer,
+    tasks: tasksReducer,
+    users: usersReducer,
+    filters: filtersReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(sagaMiddleware),
 });
 
-// sagaMiddleware.run(mySaga)
+sagaMiddleware.run(rootSaga)
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

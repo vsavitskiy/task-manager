@@ -1,0 +1,41 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  background: white;
+  border: 1px solid black;
+}
+
+.closeButton {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+
+  svg {
+    display: block;
+  }
+}
+
+.content {
+  margin-right: 24px;
+}
+
+.actions {
+  margin-top: 30px;
+  text-align: right;
+
+  button + button {
+    margin-left: 10px;
+  }
+}

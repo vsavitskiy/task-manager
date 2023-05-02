@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider
 } from "react-router-dom";
@@ -24,6 +25,9 @@ import {
   SubheaderRightComponent as TaskPageSubheaderRightComponent
 } from "./pages/tasks/[id]";
 
+import { TASKS_ROUTE } from "./pages/tasks";
+import { TASK_ROUTE } from "./pages/tasks/[id]/constants";
+
 import './index.css';
 
 const container = document.getElementById('root')!;
@@ -33,7 +37,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<DefaultLayout />}>
       <Route index element={<Root />} />
       <Route
-        path="tasks"
+        path={TASKS_ROUTE}
         element={<Tasks />}
         handle={{
           headerProps: {
@@ -44,7 +48,7 @@ const router = createBrowserRouter(
       />
 
       <Route
-        path="tasks/:id"
+        path={TASK_ROUTE}
         element={<Task />}
         handle={{
           headerProps: {
@@ -53,6 +57,8 @@ const router = createBrowserRouter(
           }
         }}
       />
+
+      <Route path="*" element={<Navigate to="/" />} />
     </Route>
   )
 );

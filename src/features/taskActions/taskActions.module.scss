@@ -1,0 +1,15 @@
+.taskActions {
+  display: flex;
+
+  * + * {
+    margin-left: 20px;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+.editingModal {
+  width: 700px;
+}

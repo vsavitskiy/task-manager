@@ -1,0 +1,9 @@
+.filters {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 21px;
+
+  & > * {
+    margin-right: 16px;
+  }
+}

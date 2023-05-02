@@ -1,12 +1,13 @@
 // TODO: remove
 // @ts-nocheck
-
 import React from "react";
 import { Outlet, useMatches } from "react-router-dom";
 import { Header } from "../../widgets/header";
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 export const Default: React.FC = () => {
-  const matches = useMatches()
+  const matches = useMatches();
 
   const [headerProps] = matches
     .filter((match) => Boolean(match.handle?.headerProps))
@@ -23,6 +24,7 @@ export const Default: React.FC = () => {
       <main>
         <Outlet />
       </main>
+      <ToastContainer />
     </>
   )
 }

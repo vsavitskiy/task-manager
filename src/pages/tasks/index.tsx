@@ -1,5 +1,5 @@
 import React from "react";
-import { Filters } from "../../widgets/filters";
+import { TasksList } from "../../widgets/tasksList";
 
 export const TASKS_ROUTE = 'tasks'
 
@@ -7,8 +7,8 @@ export { SubheaderRightComponent } from './ui/subheaderRightComponent'
 
 export const Tasks: React.FC = () => {
   return (
-    <>
-      <Filters />
-    </>
+    <div>
+      <TasksList />
+    </div>
   )
 }

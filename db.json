@@ -1,0 +1,92 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "first_name": "Andrew",
+      "last_name": "Delarue"
+    },
+    {
+      "id": "2",
+      "first_name": "Szymon",
+      "last_name": "Jefferson"
+    },
+    {
+      "id": "3",
+      "first_name": "Frankie",
+      "last_name": "Conrad"
+    },
+    {
+      "id": "4",
+      "first_name": "Jamie-Lee",
+      "last_name": "Anthony"
+    },
+    {
+      "id": "5",
+      "first_name": "Kaeden",
+      "last_name": "Rhodes"
+    },
+    {
+      "id": "6",
+      "first_name": "Aleyna",
+      "last_name": "Gross"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "0",
+      "name": "Cleaning after every reservation",
+      "assignee": "1",
+      "starts_at": "2023-05-01T18:05:31Z",
+      "due_at": "2023-05-01T20:05:31Z",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+    },
+    {
+      "id": "1",
+      "name": "Maintenance services",
+      "assignee": "2",
+      "starts_at": "2023-05-01T18:05:31Z",
+      "due_at": "2023-05-01T20:05:31Z",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+    },
+    {
+      "id": "2",
+      "name": "Security patrol222",
+      "assignee": "3",
+      "starts_at": "2023-05-01T18:05:31Z",
+      "due_at": "2023-05-01T20:05:31Z",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+    },
+    {
+      "id": "3",
+      "name": "Maintenance services II",
+      "assignee": "4",
+      "starts_at": "2023-05-01T18:05:31Z",
+      "due_at": "2023-05-01T20:05:31Z",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+    },
+    {
+      "id": "4",
+      "name": "Cleaning before every reservation",
+      "assignee": "5",
+      "starts_at": "2023-05-01T18:05:31Z",
+      "due_at": "2023-05-01T20:05:31Z",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+    },
+    {
+      "name": "test1",
+      "assignee": "1",
+      "starts_at": "2023-05-04T03:00:00.000Z",
+      "due_at": "2023-05-05T03:00:00.000Z",
+      "description": "adfaf",
+      "id": "WbTbFne"
+    },
+    {
+      "name": "afdaf",
+      "assignee": "1",
+      "starts_at": null,
+      "due_at": null,
+      "description": "",
+      "id": "d9bxpm9"
+    }
+  ]
+}

@@ -1,14 +1,27 @@
 import React, { ReactNode } from "react";
+import cn from 'classnames';
 
-interface Props {
+import styles from './button.module.scss';
+
+export type ButtonVariants = "default" | "primary" | "danger";
+
+export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   children: ReactNode;
+  variant?: ButtonVariants;
 }
 
-export const Button: React.FC<Props> = (props) => {
-  const { children } = props;
+export const Button: React.FC<ButtonProps> = (props) => {
+  const {
+    children,
+    variant = "default",
+    ...rest
+  } = props;
 
   return (
-    <button>
+    <button
+      className={cn(styles.button, styles[variant])}
+      {...rest}
+    >
       {children}
     </button>
   )
