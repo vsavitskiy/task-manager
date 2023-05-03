@@ -41,11 +41,10 @@ export const PreviewTask: React.FC<PreviewTaskProps> = (props) => {
           ? (
             <div>
               <div>Assigned to</div>
-              <UserCard name={assignee} />
+              <UserCard id={task.assignee} />
             </div>
           ) : null
       }
-
     </div>
   )
 }

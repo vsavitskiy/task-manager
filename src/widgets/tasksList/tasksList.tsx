@@ -1,25 +1,24 @@
 import React, { SyntheticEvent, useState } from 'react';
 import { Cell, useTable } from 'react-table';
 
-import { Task, tasksSelectors } from "../../entities/tasks";
+import { useAppSelector } from "../../app/hooks";
+import { usersSelectors } from '../../entities/users';
+import { Task } from "../../entities/tasks";
 import { Modal } from "../../shared/ui/modal";
 import { Preloader } from "../../shared/ui/preloader";
 import { PreviewTask } from "../../features/previewTask";
 import { TaskActions } from "../../features/taskActions";
-import { Filters } from "../../features/filters";
+import { Filters, filtersSelectors } from "../../features/filters";
 import { formatDate } from "./helpers";
-import { useAppSelector } from "../../app/hooks";
 
 import styles from './tasksList.module.scss';
-import { usersSelectors } from '../../entities/users';
-
-
 
 export const TasksList: React.FC = () => {
   const [taskModalIsOpen, setTaskModalIsOpen] = useState<boolean>(false);
   const [currentTask, setCurrentTask] = useState<Task | null>(null);
-  const tasks = useAppSelector(tasksSelectors.selectTasksWithUsers);
+  const tasks = useAppSelector(filtersSelectors.selectFilteredTasks);
   const status = useAppSelector(usersSelectors.selectStatus);
+  const usersNameIdMapping = useAppSelector(usersSelectors.selectUsersNameIdMapping);
 
   const columns = React.useMemo(
     () => [
@@ -30,6 +29,7 @@ export const TasksList: React.FC = () => {
       {
         Header: 'Assignee',
         accessor: 'assignee',
+        Cell: (cell: any) => usersNameIdMapping[cell.value]
       },
       {
         Header: 'Starts at',
@@ -51,7 +51,7 @@ export const TasksList: React.FC = () => {
         )
       },
     ],
-    []
+    [usersNameIdMapping]
   );
 
   const handlePreviewTask = (e: SyntheticEvent, task: Task) => {

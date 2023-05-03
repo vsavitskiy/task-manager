@@ -1,23 +1,25 @@
 import React from "react";
 import { Avatar } from "../../../../shared/ui/avatar/avatar";
+import {useAppSelector} from "../../../../app/hooks";
+import { usersSelectors } from "../..";
 
 interface UserCardProps {
-  name: string;
-  avatarUrl?: string;
+  id: string;
 }
 
 export const UserCard: React.FC<UserCardProps> = (props) => {
-  const { name, avatarUrl = 'https://i.pravatar.cc/300' } = props;
-  const [firstName, lastName] = name.split(' ');
+  const { id } = props;
+  const user = useAppSelector(usersSelectors.selectUserById(id));
+  const avatarUrl = 'https://i.pravatar.cc/300';
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div>
       <Avatar src={avatarUrl} />
-      {
-        name
-          ? <div>{firstName} {lastName.slice(0,1)}.</div>
-          : null
-      }
+      <div>{user.first_name} {user.last_name.slice(0,1)}.</div>
     </div>
   )
 }
