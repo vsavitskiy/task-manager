@@ -1,0 +1,23 @@
+:root {
+  --sidebar-width: 60px;
+}
+
+.aside {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+}
+
+.header,
+.mainContent {
+  margin-left: var(--sidebar-width);
+}
+
+.main {
+  min-height: 100%;
+}
+
+.mainContent {
+  flex: 1;
+}

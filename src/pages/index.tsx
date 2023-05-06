@@ -6,6 +6,8 @@ interface Props {
 
 }
 
+export const ROOT_ROUTE = '/';
+
 export const Root: React.FC<Props> = () => {
   return (
     <div>

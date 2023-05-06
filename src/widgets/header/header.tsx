@@ -19,7 +19,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
   const RightComponent = subheaderRightComponent || null;
 
   return (
-    <header className={styles.header}>
+    <div className={styles.header}>
       <div className={styles.leftSide}>
         { LeftComponent }
       </div>
@@ -27,6 +27,6 @@ export const Header: React.FC<HeaderProps> = (props) => {
       <div className={styles.rightSide}>
         { RightComponent }
       </div>
-    </header>
+    </div>
   )
 }

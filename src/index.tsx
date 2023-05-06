@@ -25,6 +25,7 @@ import {
   SubheaderRightComponent as TaskPageSubheaderRightComponent
 } from "./pages/tasks/[id]";
 
+import { ROOT_ROUTE } from './pages';
 import { TASKS_ROUTE } from "./pages/tasks";
 import { TASK_ROUTE } from "./pages/tasks/[id]/constants";
 
@@ -34,7 +35,7 @@ const container = document.getElementById('root')!;
 const root = createRoot(container);
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<DefaultLayout />}>
+    <Route path={ROOT_ROUTE} element={<DefaultLayout />}>
       <Route index element={<Root />} />
       <Route
         path={TASKS_ROUTE}
