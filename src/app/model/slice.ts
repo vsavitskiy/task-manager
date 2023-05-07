@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { LoadingStatus } from "../../shared/types";
 
-export interface AppState {
-  status: 'idle' | 'loading' | 'failed';
+interface AppState {
+  status: LoadingStatus;
 }
 
 const initialState: AppState = {

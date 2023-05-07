@@ -5,5 +5,7 @@ export interface Task {
   starts_at: string | null;
   due_at: string | null;
   description: string;
-  unsavedChanges: Task | null;
+  unsaved_changes?: Task | null;
 }
+
+export type PayloadTask = Omit<Task, 'unsaved_changes'>

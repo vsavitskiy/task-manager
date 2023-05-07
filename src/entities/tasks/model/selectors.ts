@@ -16,11 +16,11 @@ export const selectTaskById = (id: string) => {
   return (state: RootState) => state.tasks.tasks.find((task) => task.id === id);
 }
 
-export const selectTaskByIdWithUnsavedChanges = (id: string) => createSelector(
+export const selectTaskByIdWithUnsavedChangesMerged = (id: string) => createSelector(
   selectTaskById(id),
   (task) => ({
-    ...omit(task, 'unsavedChanges'),
-    ...task?.unsavedChanges,
+    ...omit(task, 'unsaved_changes'),
+    ...task?.unsaved_changes,
 }))
 
 export const selectTasksWithUsers = createSelector(

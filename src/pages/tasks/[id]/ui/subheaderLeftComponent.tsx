@@ -8,7 +8,7 @@ import { tasksActions, tasksSelectors } from "../../../../entities/tasks";
 export const SubheaderLeftComponent = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const task = useAppSelector(tasksSelectors.selectTaskByIdWithUnsavedChanges(String(id)));
+  const task = useAppSelector(tasksSelectors.selectTaskByIdWithUnsavedChangesMerged(String(id)));
 
   const handleTaskNameChange = (value: string) => {
     dispatch(tasksActions.updateTask({

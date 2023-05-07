@@ -18,7 +18,7 @@ export const Task: React.FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const status = useAppSelector(tasksSelectors.selectStatus);
-  const task = useAppSelector(tasksSelectors.selectTaskByIdWithUnsavedChanges(String(id)));
+  const task = useAppSelector(tasksSelectors.selectTaskByIdWithUnsavedChangesMerged(String(id)));
 
   const { starts_at, due_at, description, assignee } = task;
 

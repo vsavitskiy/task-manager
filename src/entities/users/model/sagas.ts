@@ -1,35 +1,16 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { usersActions } from "./slice";
+import { getUsersApiRequest } from "./api";
+import { User } from "../types";
 
-interface CallAPIParameters {
-  url: string;
-  method: string;
-  body?: BodyInit;
-}
-
-let callAPI = async (params: CallAPIParameters) => {
-  const { url, method, body } = params;
-  const response = await fetch(url, { method, body });
-  return await response.json();
-}
-
-function* fetchUsers() {
+export function* fetchUsers() {
   try {
     yield put(usersActions.updateStatus('loading'));
-    // @ts-ignore
-    const users = yield call(() => {
-      return callAPI({
-        url: 'http://localhost:3001/users',
-        method: 'GET',
-      })
-    });
-
+    const users: User[] = yield call(getUsersApiRequest);
     yield put(usersActions.update(users));
-  } catch (e) {
-    console.error(e);
-    yield put(usersActions.updateStatus('failed'));
-  } finally {
     yield put(usersActions.updateStatus('idle'));
+  } catch (e) {
+    yield put(usersActions.updateStatus('failed'));
   }
 }
 

@@ -16,8 +16,8 @@ const Navigation: React.FC<NavigationProps> = (props) => {
   return (
     <div className={styles.navigation}>
       {
-        props.buttons.map(({ to, icon }: NavigationButton) => (
-          <Link to={to}>
+        props.buttons.map(({ to, icon }: NavigationButton, index) => (
+          <Link key={index} to={to}>
             {icon}
           </Link>
         ))

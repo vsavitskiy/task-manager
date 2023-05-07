@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Task } from "../types";
+import { LoadingStatus } from "../../../shared/types";
 import { findTaskByIndex } from "./helpers";
 
-export type Status = 'idle' | 'loading' | 'failed';
+import type { PayloadTask, Task } from "../types";
 
 export interface TasksState {
   tasks: Task[];
-  status: Status;
+  status: LoadingStatus;
   createdTask: string | null;
 }
 
@@ -20,10 +20,10 @@ export const tasksSlice = createSlice({
   name: 'tasks',
   initialState: initialState,
   reducers: {
-    update: (state, action: PayloadAction<Task[]>) => {
-      state.tasks = action.payload;
+    update: (state, action: PayloadAction<PayloadTask[]>) => {
+      state.tasks = action.payload as Task[];
     },
-    updateStatus: (state, action: PayloadAction<Status>) => {
+    updateStatus: (state, action: PayloadAction<LoadingStatus>) => {
       state.status = action.payload;
     },
     created: (state, action: PayloadAction<string | null>) => {
@@ -35,8 +35,8 @@ export const tasksSlice = createSlice({
       if (index !== null) {
         state.tasks[index] = {
           ...state.tasks[index],
-          unsavedChanges: {
-            ...(state.tasks[index].unsavedChanges && state.tasks[index].unsavedChanges),
+          unsaved_changes: {
+            ...(state.tasks[index].unsaved_changes && state.tasks[index].unsaved_changes),
             ...action.payload
           }
         };
@@ -48,7 +48,7 @@ export const tasksSlice = createSlice({
       if (index !== null) {
         state.tasks[index] = {
           ...state.tasks[index],
-          unsavedChanges: null,
+          unsaved_changes: null,
         }
       }
     },
@@ -58,7 +58,7 @@ export const tasksSlice = createSlice({
       if (index !== null) {
         state.tasks[index] = {
           ...action.payload,
-          unsavedChanges: null
+          unsaved_changes: null
         };
       }
     }

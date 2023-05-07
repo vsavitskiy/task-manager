@@ -18,7 +18,7 @@ export const SubheaderRightComponent = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (task?.unsavedChanges) {
+    if (task?.unsaved_changes) {
       setIsModalOpen(true);
     } else {
       navigate(generatePath(TASKS_ROUTE));

@@ -1,139 +1,92 @@
 import { put, call, takeEvery, select } from 'redux-saga/effects'
-import { tasksActions } from "./slice";
-import { selectTaskByIdWithUnsavedChanges, selectTasks} from "./selectors";
-import { Task } from "../types";
 import { toast } from 'react-toastify';
+import { tasksActions } from "./slice";
+import {
+  selectTaskByIdWithUnsavedChangesMerged,
+  selectTasks
+} from "./selectors";
+import { Task } from "../types";
+import {
+  createTaskApiRequest,
+  deleteTaskApiRequest,
+  getTasksApiRequest,
+  updateTaskApiRequest
+} from "./api";
 
-interface RemoveTaskAction {
+export interface RemoveTaskAction {
   type: string;
   payload: string;
 }
 
-interface CreateTaskAction {
+export interface CreateTaskAction {
   type: string;
   payload: Task;
 }
 
-interface SaveTaskAction {
+export interface SaveTaskAction {
   type: string;
   payload: string;
 }
 
-interface CallAPIParameters {
-  url: string;
-  method: string;
-  body?: BodyInit;
-  headers?: Record<string, string>
-}
-
-let callAPI = async (params: CallAPIParameters) => {
-  const { url, method, body, headers } = params;
-  const response = await fetch(
-    url,
-    {
-      method,
-      body,
-      headers: { "Content-type": "application/json", ...headers }
-  });
-
-  return await response.json();
-}
-
-function* fetchTasks() {
+export function* fetchTasks() {
   try {
     yield put(tasksActions.updateStatus('loading'));
-
-    // @ts-ignore
-    const tasks = yield call(() => {
-      return callAPI({
-        url: 'http://localhost:3001/tasks',
-        method: 'GET',
-      })
-    });
-
+    const tasks: Task[] = yield call(getTasksApiRequest);
     yield put(tasksActions.update(tasks));
-  } catch (e) {
-    console.error(e);
-    yield put(tasksActions.updateStatus('failed'));
-  } finally {
     yield put(tasksActions.updateStatus('idle'));
+  } catch (e) {
+    yield put(tasksActions.updateStatus('failed'));
   }
 }
 
-function* removeTask(action: RemoveTaskAction) {
+export function* removeTask(action: RemoveTaskAction) {
   const { payload } = action;
 
   try {
     const tasks: Task[] = yield select(selectTasks);
-
     yield put(tasksActions.updateStatus('loading'));
-    yield call(() => {
-      return callAPI({
-        url: `http://localhost:3001/tasks/${payload}`,
-        method: 'DELETE',
-      })
-    });
+    yield call(() => deleteTaskApiRequest(payload));
     const updatedTasks = tasks.filter((task: Task) => task.id !== payload);
     yield put(tasksActions.update(updatedTasks));
-  } catch (e) {
-    console.error(e);
-    yield put(tasksActions.updateStatus('failed'));
-  } finally {
     yield put(tasksActions.updateStatus('idle'));
+  } catch (e) {
+    yield put(tasksActions.updateStatus('failed'));
   }
 }
 
-function* createTask(action: CreateTaskAction) {
+export function* createTask(action: CreateTaskAction) {
   const { payload } = action;
   const tasks: Task[] = yield select(selectTasks);
 
   try {
     yield put(tasksActions.updateStatus('loading'));
-    // @ts-ignore
-    const response = yield call(() => {
-      return callAPI({
-        url: `http://localhost:3001/tasks`,
-        method: 'POST',
-        body: JSON.stringify(payload)
-      });
-    });
+    const response: Task = yield call(() => createTaskApiRequest(payload));
     const updatedTasks = [...tasks, response];
     yield put(tasksActions.update(updatedTasks));
-    yield put(tasksActions.created(response.id));
-  } catch (e) {
-    console.error(e);
-    yield put(tasksActions.updateStatus('failed'));
-  } finally {
+    yield put(tasksActions.created(response.id as string));
     yield put(tasksActions.updateStatus('idle'));
+  } catch (e) {
+    yield put(tasksActions.updateStatus('failed'));
   }
 }
 
-function* saveTask(action: SaveTaskAction) {
+export function* saveTask(action: SaveTaskAction) {
   const { payload } = action;
-  const task: Task = yield select(selectTaskByIdWithUnsavedChanges(payload));
+  const task: Task = yield select(selectTaskByIdWithUnsavedChangesMerged(payload));
 
   try {
     yield put(tasksActions.updateStatus('loading'));
-    // @ts-ignore
-    const response = yield call(() => {
-      return callAPI({
-        url: `http://localhost:3001/tasks/${payload}`,
-        method: 'PUT',
-        body: JSON.stringify(task)
-      });
-    });
-
+    const response: Task = yield call(() => updateTaskApiRequest(task));
     yield put(tasksActions.taskSaved(response));
-    toast.success('Task added successfully', {
+    yield call(() => toast.success('Task added successfully', {
       position: toast.POSITION.TOP_CENTER,
       hideProgressBar: true,
       pauseOnHover: true,
-    });
-  } catch (e) {
-    console.error(e);
-    yield put(tasksActions.updateStatus('failed'));
-  } finally {
+    }));
     yield put(tasksActions.updateStatus('idle'));
+  } catch (e) {
+
+    yield put(tasksActions.updateStatus('failed'));
   }
 }
 

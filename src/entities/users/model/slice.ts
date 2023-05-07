@@ -1,11 +1,10 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LoadingStatus } from "../../../shared/types";
 import { User } from "../types";
-import {Task} from "../../tasks";
-import {Status} from "../../tasks/model/slice";
 
 export interface UsersState {
   users: User[];
-  status: 'idle' | 'loading' | 'failed';
+  status: LoadingStatus;
 }
 
 const initialState: UsersState = {
@@ -20,7 +19,7 @@ export const usersSlice = createSlice({
     update: (state, action: PayloadAction<User[]>) => {
       state.users = action.payload
     },
-    updateStatus: (state, action: PayloadAction<Status>) => {
+    updateStatus: (state, action: PayloadAction<LoadingStatus>) => {
       state.status = action.payload;
     },
   },
