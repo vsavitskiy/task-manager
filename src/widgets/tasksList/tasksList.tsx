@@ -95,18 +95,24 @@ export const TasksList: React.FC = () => {
                 headerGroups.map(headerGroup => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {
-                      headerGroup.headers.map(column => (
-                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                          { column.render('Header') }
-                          {
-                            column.isSorted
-                              ? column.isSortedDesc
-                                ? <SortingButton state='active' direction='up' />
-                                : <SortingButton state='active' />
-                              : <SortingButton state='inactive' />
-                          }
-                        </th>
-                      ))
+                      headerGroup.headers.map(column => {
+                        if (column.id === 'actions') {
+                          return <th {...column.getHeaderProps(column.getSortByToggleProps())} />
+                        }
+
+                        return (
+                          <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                            { column.render('Header') }
+                            {
+                              column.isSorted
+                                ? column.isSortedDesc
+                                  ? <SortingButton state='active' direction='up' />
+                                  : <SortingButton state='active' />
+                                : <SortingButton state='inactive' />
+                            }
+                          </th>
+                        )
+                      })
                     }
                   </tr>
                 ))
