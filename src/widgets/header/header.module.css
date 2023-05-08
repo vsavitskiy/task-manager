@@ -1,7 +1,16 @@
 .header {
+
+}
+
+.general {
+    flex: 1;
+}
+
+.subheader {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .leftSide {

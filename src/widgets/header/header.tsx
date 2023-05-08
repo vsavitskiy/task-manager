@@ -25,12 +25,14 @@ export const Header: React.FC<HeaderProps> = (props) => {
         <Searchbar />
       </div>
 
-      <div className={styles.leftSide}>
-        { LeftComponent }
-      </div>
+      <div className={styles.subheader}>
+        <div className={styles.leftSide}>
+          { LeftComponent }
+        </div>
 
-      <div className={styles.rightSide}>
-        { RightComponent }
+        <div className={styles.rightSide}>
+          { RightComponent }
+        </div>
       </div>
     </div>
   )
