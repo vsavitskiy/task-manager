@@ -1,5 +1,7 @@
+// TODO: remove it
+// @ts-nocheck
 import React, { SyntheticEvent, useState } from 'react';
-import { Cell, useTable } from 'react-table';
+import { Cell, useTable, useSortBy } from 'react-table';
 
 import { useAppSelector } from "../../app/hooks";
 import { usersSelectors } from '../../entities/users';
@@ -9,9 +11,11 @@ import { Preloader } from "../../shared/ui/preloader";
 import { PreviewTask } from "../../features/previewTask";
 import { TaskActions } from "../../features/taskActions";
 import { Filters, filtersSelectors } from "../../features/filters";
+import { SortingButton } from "./ui/sortingButton";
 import { formatDate } from "./helpers";
 
 import styles from './tasksList.module.scss';
+
 
 export const TasksList: React.FC = () => {
   const [taskModalIsOpen, setTaskModalIsOpen] = useState<boolean>(false);
@@ -68,8 +72,7 @@ export const TasksList: React.FC = () => {
     setTaskModalIsOpen(false);
   }
 
-  // @ts-ignore
-  const tableInstance = useTable<Task>({ columns, data: tasks })
+  const tableInstance = useTable<Task>({ columns, data: tasks }, useSortBy)
   const {
     getTableProps,
     getTableBodyProps,
@@ -93,8 +96,15 @@ export const TasksList: React.FC = () => {
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {
                       headerGroup.headers.map(column => (
-                        <th {...column.getHeaderProps()}>
+                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                           { column.render('Header') }
+                          {
+                            column.isSorted
+                              ? column.isSortedDesc
+                                ? <SortingButton state='active' direction='up' />
+                                : <SortingButton state='active' />
+                              : <SortingButton state='inactive' />
+                          }
                         </th>
                       ))
                     }
