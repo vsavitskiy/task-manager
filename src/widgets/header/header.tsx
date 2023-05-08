@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { Searchbar } from "../../features/searchbar";
 
 import styles from './header.module.css';
 
@@ -20,6 +21,10 @@ export const Header: React.FC<HeaderProps> = (props) => {
 
   return (
     <div className={styles.header}>
+      <div className={styles.general}>
+        <Searchbar />
+      </div>
+
       <div className={styles.leftSide}>
         { LeftComponent }
       </div>

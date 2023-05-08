@@ -4,6 +4,7 @@ import { appReducer } from "./model/slice";
 import { tasksReducer } from '../entities/tasks';
 import { usersReducer } from "../entities/users";
 import { filtersReducer } from "../features/filters";
+import { searchReducer } from "../features/searchbar/model/slice";
 import { rootSaga } from './model/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -14,6 +15,7 @@ export const store = configureStore({
     tasks: tasksReducer,
     users: usersReducer,
     filters: filtersReducer,
+    search: searchReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(sagaMiddleware),

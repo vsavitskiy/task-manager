@@ -67,51 +67,49 @@ export const Modal: React.FC<ModalProps> = (props) => {
             onSubmit();
           }
 
-          return (
+          return portal(
             <div className={styles.overlay}>
-              {portal(
-                <div className={cn}>
-                  {
-                    showCloseButton && (
-                      <a className={styles.closeButton} onClick={closePortal}>
-                        <CloseIcon width={14} height={14} />
-                      </a>
-                    )
-                  }
+              <div className={cn}>
+                {
+                  showCloseButton && (
+                    <a className={styles.closeButton} onClick={closePortal}>
+                      <CloseIcon width={14} height={14} />
+                    </a>
+                  )
+                }
 
-                  <div className={styles.content}>
-                    { children }
-                  </div>
-
-                  {
-                    showActionButtons && (
-                      <div className={styles.actions}>
-                        {actionButtons || (
-                          <>
-                            {
-                              showDiscardButton && (
-                                <Button onClick={handleDiscard}>
-                                  {discardButtonCaption}
-                                </Button>
-                              )
-                            }
-                            {
-                              showSubmitButton && (
-                                <Button
-                                  onClick={handleSubmit}
-                                  variant="primary"
-                                >
-                                  {submitButtonCaption}
-                                </Button>
-                              )
-                            }
-                          </>
-                        )}
-                      </div>
-                    )
-                  }
+                <div className={styles.content}>
+                  { children }
                 </div>
-              )}
+
+                {
+                  showActionButtons && (
+                    <div className={styles.actions}>
+                      {actionButtons || (
+                        <>
+                          {
+                            showDiscardButton && (
+                              <Button onClick={handleDiscard}>
+                                {discardButtonCaption}
+                              </Button>
+                            )
+                          }
+                          {
+                            showSubmitButton && (
+                              <Button
+                                onClick={handleSubmit}
+                                variant="primary"
+                              >
+                                {submitButtonCaption}
+                              </Button>
+                            )
+                          }
+                        </>
+                      )}
+                    </div>
+                  )
+                }
+              </div>
             </div>
           )
         }
