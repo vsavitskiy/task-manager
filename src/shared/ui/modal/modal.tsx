@@ -68,7 +68,8 @@ export const Modal: React.FC<ModalProps> = (props) => {
           }
 
           return portal(
-            <div className={styles.overlay}>
+            <>
+            <div className={styles.overlay} />
               <div className={cn}>
                 {
                   showCloseButton && (
@@ -110,7 +111,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
                   )
                 }
               </div>
-            </div>
+            </>
           )
         }
       }
